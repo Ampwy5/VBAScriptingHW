@@ -1,0 +1,58 @@
+VBA HW EASY SOLUTION -- ALPHABETICAL TESTING
+
+Sub tickerVolumeWorksheetLoop()
+
+  Dim ws As Worksheet
+
+  For Each ws In ActiveWorkbook.Worksheets
+
+  ws.Cells(1,9) = "Ticker"
+  ws.Cells(1,10) = "Total Stock Volume"
+
+  Dim tickerSymbol As String
+
+  Dim totalVolume As Variant
+  totalVolume = 0
+
+  Dim currentSummaryRow As Variant
+  currentSummaryRow = 2
+
+  Dim lastRow As Variant
+  lastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+
+
+    For J = 2 To lastRow
+
+    If ws.Cells(J + 1, 1).Value = ws.Cells(J, 1).Value Then
+
+
+      totalVolume = totalVolume + ws.Cells(J, 7).Value
+
+
+    Else
+
+
+      tickerSymbol = ws.Cells(J, 1).Value
+
+
+      totalVolume = totalVolume + ws.Cells(J, 7).Value
+
+
+      ws.Cells(currentSummaryRow, 9).Value = tickerSymbol
+      ws.Cells(currentSummaryRow, 10).Value = totalVolume
+
+
+      currentSummaryRow = currentSummaryRow + 1
+
+
+      totalVolume = 0
+
+            End If
+        Next J
+    Next
+
+
+
+
+   End Sub
